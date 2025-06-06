@@ -45,6 +45,8 @@ const ViewFare = ({
   showDetails,
   selectedSplitBrands,
   advancedSelectedSeats,
+  updatedBrandsByFlightIndex,
+  crrFlightData
 }) => {
   const hasShownErrorToast = useRef(false);
   const { jsonHeader } = useAuth();
@@ -75,12 +77,6 @@ const ViewFare = ({
   const { isMobile } = useWindowSize();
   const hasInitializedSeats = useRef(false);
 
-  const apiCallTracker = useRef({
-    fareRules: false,
-    seatMap: false,
-  });
-
-  const abortController = useRef(new AbortController());
 
   useEffect(() => {
     if (selectedSeats.length === 0 || isReset) {
@@ -147,202 +143,7 @@ const ViewFare = ({
     }
   }, [seatMapData]);
 
-  // Air price operation by api
-  const fetchAirPrice = async (brand, brandIndex) => {
-    setErrorMessage("");
-    setAirPriceLoading(brandIndex);
 
-    const isReissueSearch = flightAfterSearch === "reissue-search";
-    const isAutoReissue = flightData[crrItenary]?.autoReissue === true;
-
-    const flightBody = {
-      passengers: [
-        {
-          type: "ADT",
-          count: totalPassenger?.adultCount || 0,
-          ages: [],
-        },
-        {
-          type: "CNN",
-          count: Array.isArray(totalPassenger?.childCount)
-            ? totalPassenger.childCount.length
-            : 0,
-          ages: Array.isArray(totalPassenger?.childCount)
-            ? totalPassenger.childCount.map((age) => parseInt(age, 10))
-            : [],
-        },
-        {
-          type: "INF",
-          count: totalPassenger?.infantCount || 0,
-          ages: [],
-        },
-      ],
-      brandId: brand?.brandId,
-      cabin,
-      selectedSeat:
-        searchType === "advanced"
-          ? selectedSeats
-              ?.flat()
-              ?.map((seat) => seat.bookingClass)
-              .filter(Boolean)
-          : brand?.seatInfo?.map((seat) => seat.bookingClass).filter(Boolean) ||
-            [],
-      segmentsList,
-      data: flightData[crrItenary]?.uuid,
-      reIssue: flightData[crrItenary]?.reIssue || false,
-      paxDetails: flightData[crrItenary]?.paxDetails || [],
-      bookingId: flightData[crrItenary]?.bookingId || "",
-      advanceSearch: searchType === "advanced",
-    };
-
-    const reissueBody = {
-      brandId: brand?.brandId,
-      bookingId: bookingId,
-      uuid: flightData[crrItenary]?.uuid,
-    };
-
-    let url = `${process.env.REACT_APP_BASE_URL}/api/v1/user/air-price`;
-    let method = "post";
-    let requestBody = flightBody;
-
-    if (isReissueSearch) {
-      url = `${process.env.REACT_APP_BASE_URL}/api/v1/user/reissue/price`;
-      if (isAutoReissue) {
-        method = "post";
-        requestBody = reissueBody;
-      } else {
-        method = "patch";
-        requestBody = flightBody;
-      }
-    }
-
-    try {
-      const response = await axios[method](url, requestBody, jsonHeader());
-      const airPriceData = response?.data?.data || [];
-      const updatedBrand = airPriceData[0]?.brands?.[0] || null;
-
-      dispatch(setBookable(!!updatedBrand));
-
-      return {
-        ...response.data,
-        airPrice: !!updatedBrand,
-        updatedBrand,
-      };
-    } catch (error) {
-      // handle errors as before
-      return { airPrice: false };
-    } finally {
-      setAirPriceLoading(false);
-      dispatch(setShouldCallAirPrice(""));
-      dispatch(setPriceFlagFalse());
-    }
-  };
-
-  // Fare rules operation by api
-  const fetchFareRules = async (brandId, data) => {
-    if (apiCallTracker.current.fareRules) return null;
-
-    apiCallTracker.current.fareRules = true;
-    setIsFareLoading(true);
-
-    try {
-      const isReissue =
-        flightAfterSearch === "reissue-search" && data?.autoReissue === true;
-
-      const body = {
-        brandId: brandId?.toString(),
-        system: data?.system,
-        data: data?.uuid,
-      };
-
-      const reissueBody = {
-        brandId: brandId?.toString(),
-        bookingId: bookingId,
-        uuid: data?.uuid,
-      };
-
-      const url = isReissue
-        ? `${process.env.REACT_APP_BASE_URL}/api/v1/user/reissue/fare-rule`
-        : `${process.env.REACT_APP_BASE_URL}/api/v1/user/fare-rule`;
-
-      const requestBody = isReissue ? reissueBody : body;
-
-      const response = await axios.post(url, requestBody, {
-        ...jsonHeader(),
-        signal: abortController.current.signal,
-      });
-
-      return response.data?.data;
-    } catch (error) {
-      if (axios.isCancel(error)) return null;
-
-      if (
-        !hasShownErrorToast.current &&
-        error.response?.data?.success === false &&
-        error.response?.status === 400
-      ) {
-        dispatch(setShouldCallAirPrice("fare"));
-        hasShownErrorToast.current = true;
-      } else if (error?.response?.status === 401) {
-        checkUnAuthorized(error);
-      }
-      return null;
-    } finally {
-      apiCallTracker.current.fareRules = false;
-      setIsFareLoading(false);
-    }
-  };
-
-  const handleFetchAndBooking = async (brand, brandIndex) => {
-    setErrorMessage("");
-    const result = await fetchAirPrice(brand, brandIndex);
-    if (result?.data && result?.data?.response?.length > 0) {
-      const updatedBrands = modifiedBrands.map((item) =>
-        item?.brandId === brand?.brandId
-          ? {
-              ...item,
-              agentPrice: result?.data?.response[0]?.brands[0]?.agentPrice,
-              clientPrice: result?.data?.response[0]?.brands[0]?.clientPrice,
-              commission: result?.data?.response[0]?.brands[0]?.commission,
-              additionalFare:
-                result?.data?.response[0]?.brands[0]?.additionalFare,
-            }
-          : item
-      );
-
-      setModifiedBrands(updatedBrands);
-      dispatch(setModifiedSplitBarnds(updatedBrands));
-      dispatch(setAllFareRules(updatedBrands));
-
-      navigate("/dashboard/airbooking", {
-        state: {
-          flightData,
-          crrItenary,
-          searchType,
-          totalPassenger,
-          brand: [updatedBrands[crrItenary][brandIndex]],
-          cabin,
-          segmentsList,
-          fareRules: updatedBrands,
-          reissuePassengers: reissuePassengers || [],
-          flightAfterSearch: flightAfterSearch,
-          paxDetails: paxDetails || [],
-          bookingId: bookingId || [],
-          flightBrand,
-        },
-      });
-    } else {
-      setErrorMessage("This flight is not bookable");
-      const updatedBrands = modifiedBrands.map((item) =>
-        item.brandId === brand.brandId ? { ...item, isBook: false } : item
-      );
-
-      setModifiedBrands(updatedBrands);
-      dispatch(setModifiedSplitBarnds(updatedBrands));
-      dispatch(setAllFareRules(updatedBrands));
-      dispatch(setShouldCallAirPrice(""));
-    }
-  };
 
   const handleSplitAndBooking = () => {
     navigate("/dashboard/airbooking", {
@@ -424,43 +225,7 @@ const ViewFare = ({
   };
 
   // Fetching fare rules (regular/split/reissue)
-  useEffect(() => {
-    if (searchType === "advanced") return;
 
-    const fetchBrandFareRules = async () => {
-      if (Array.isArray(flightData) && shouldCallAirPrice === "fare") {
-        const allUpdatedBrands = [];
-
-        for (const data of flightData) {
-          if (!data?.brands?.length) continue;
-
-          const updatedBrands = [];
-
-          for (const brand of data.brands) {
-            let updatedBrand = { ...brand };
-            const fareData = await fetchFareRules(brand.brandId, data);
-
-            if (fareData && fareData[0]) {
-              updatedBrand.nonStructure = fareData[0].nonStructure;
-              updatedBrand.structure = fareData[0].structure;
-              updatedBrand.accurateFareRules = fareData[0].accurateFareRules;
-            }
-
-            updatedBrands.push(updatedBrand);
-          }
-
-          // Sort the brands in the current group
-          updatedBrands.sort((a, b) => a.totalFare - b.totalFare);
-          allUpdatedBrands.push(updatedBrands);
-        }
-
-        setModifiedBrands(allUpdatedBrands);
-        dispatch(setModifiedSplitBarnds(allUpdatedBrands));
-      }
-    };
-
-    fetchBrandFareRules();
-  }, [flightData, shouldCallAirPrice, searchType, showMobile]);
 
   useEffect(() => {
     if (!showDetails || alreadyButtonClicked || searchType === "regular")

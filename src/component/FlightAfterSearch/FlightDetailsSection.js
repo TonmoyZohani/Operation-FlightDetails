@@ -126,7 +126,7 @@ const updateBrand = (brandId, updateData, updateFn) => {
     const updated = prev.map((b) =>
       b.brandId === brandId ? { ...b, ...updateData } : b
     );
-    setBrandsForIndex(updated); // Save updated list to indexed state
+    setBrandsForIndex(updated); 
     return updated;
   });
 };
@@ -250,17 +250,36 @@ const updateBrand = (brandId, updateData, updateFn) => {
   },
   {
     onSuccess: ({ brandId, data }) => {
-      updateBrand(brandId, {
-        agentPrice: data?.agentPrice || 0,
-        airPriceFlag: true,
-      }, setBrandsByFlight);
+      const brandData = data?.response?.[0]?.brands?.[0];
+
+      updateBrand(
+        brandId,
+        {
+          agentPrice: brandData?.agentPrice || 0,
+          clientPrice: brandData?.clientPrice || 0,
+          commission: brandData?.commission || 0,
+          additionalFare: brandData?.additionalFare || 0,
+          airPriceFlag: true,
+        },
+        setBrandsByFlight
+      );
     },
     onError: (error, brand) => {
-      updateBrand(brand.brandId, { airPriceFlag: true }, setBrandsByFlight);
+      updateBrand(
+        brand?.brandId,
+        { airPriceFlag: true },
+        setBrandsByFlight
+      );
       console.error("Air price error:", error);
     },
   }
 );
+
+const handleBrandClick = (brand) => {
+  if (!brand.airPriceFlag) {
+    fetchAirPriceMutation.mutate(brand);
+  }
+};
 
 
   const fetchPartialRules = async () => {
@@ -322,12 +341,6 @@ const updateBrand = (brandId, updateData, updateFn) => {
     }
   };
   
-
-  useEffect(() => {
-    dispatch(setAdvancedFlightData(finalFlightData));
-    dispatch(setAdvancedModifiedBrands(finalFlightData?.brands));
-  }, []);
-
   useEffect(() => {
     if (partialChargeData) {
       setPartialPaymentChargeData(partialChargeData);
@@ -479,15 +492,6 @@ const updateBrand = (brandId, updateData, updateFn) => {
             { value: "flight", label: "Flight Details" },
             { value: "fare", label: "Fare Summary" },
           ];
-
-      // const items = [
-      //   { value: "selectfare", label: "Select Fare" },
-      //   ...(flightData?.advanceSearch
-      //     ? [{ value: "seatAvailability", label: "Seat Availability" }]
-      //     : []),
-      //   { value: "flight", label: "Flight Details" },
-      //   { value: "fare", label: "Fare Summary" },
-      // ];
 
       if (fareAfterRules?.length > 0) {
         items.push({ value: "fareRules", label: "Fare Rules" });
@@ -915,6 +919,8 @@ const updateBrand = (brandId, updateData, updateFn) => {
                       iniadvanceSearchResult={advanceSearchResult}
                       showDetails={showDetails}
                       splitFlightArr={splitFlightArr}
+
+                      updatedBrandsByFlightIndex={updatedBrandsByFlightIndex}
                     />
                   )}
                 </>
@@ -964,6 +970,9 @@ const updateBrand = (brandId, updateData, updateFn) => {
                       iniadvanceSearchResult={advanceSearchResult}
                       showDetails={showDetails}
                       splitFlightArr={splitFlightArr}
+
+                      updatedBrandsByFlightIndex={updatedBrandsByFlightIndex}
+                      crrFlightData={crrFlightData}
                     />
                   )}
                 </>
