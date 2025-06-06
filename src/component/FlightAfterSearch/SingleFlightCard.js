@@ -76,6 +76,9 @@ const SingleFlightCard = ({
     useState(flightData);
   const dispatch = useDispatch();
 
+  // Code In Home
+  const [flightDataArr,setFlightDataArr] = useState([flightData])
+
   useEffect(() => {
     if (flightData?.brands?.length) {
       setFlightBrand([[flightData?.brands[0]]]);
@@ -724,9 +727,11 @@ const SingleFlightCard = ({
             cabin={cabin}
             fareSummaryFlightData={fareSummaryFlightData}
             setFareSummaryFlightData={setFareSummaryFlightData}
-            tabType={tabTypeRed}
+            tabType={"flight"}
             fareCard={"newFare"}
             showDetails={showDetails}
+
+            flightDataArr={flightDataArr}
           />
         </Collapse>
 
