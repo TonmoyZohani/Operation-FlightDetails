@@ -1,0 +1,47 @@
+.home-search-box-2 .MuiTabs-root button {
+  opacity: 1 !important;
+}
+
+.home-search-box-2 .MuiTabs-root button:first-child {
+  border-radius: 5px 0 0 5px;
+}
+
+@media (max-width: 1200px) {
+  .home-search-box-2 .MuiTabs-root button:first-child {
+    border-radius: 5px 0 0 0px; 
+  }
+}
+
+.home-search-box-2 .MuiTabs-root button:last-child {
+  border-radius: 0 5px 5px 0;
+}
+
+@media (max-width: 1200px) {
+  .home-search-box-2 .MuiTabs-root button:last-child {
+    border-radius: 0 5px 0px 0;
+  }
+}
+
+.home-search-box-2 button.Mui-selected {
+  font-weight: bold;
+  border-bottom: none !important;
+  background-color: #dc143c;
+  color: #fff;
+}
+
+.home-search-box-2 .MuiTabs-indicator {
+  display: none !important;
+}
+
+.css-i4bv87-MuiSvgIcon-root {
+  width: 20px !important;
+  height: 20px !important;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1rem !important;
+}

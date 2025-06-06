@@ -1,0 +1,111 @@
+.preferred-airlines {
+    background-color: white;
+    padding: 6px 12px;
+    width: 100%;
+    border: none;
+    border-radius: 3px;
+    font-size: 11px;
+}
+
+.preferred-class {
+    padding: 5.5px 11px;
+    width: 100%;
+    border-radius: 3px;
+    color: gray;
+    font-size: 11px;
+    border: none;
+}
+
+.class-wise {
+    display: flex;
+    justify-content: space-between;
+    height: 28px;
+    background-color: #FAFAFA;
+}
+
+
+@media (max-width: 600px) {
+    .preferred-airlines {
+        background-color: #FAFAFA;
+        padding: 9px 12px;
+        width: 100%;
+        border: none;
+        border-radius: 3px;
+        font-size: 11px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        font-weight: 500;
+    }
+
+    .preferred-airlines::placeholder {
+        color: #333333;
+    }
+
+    .preferred-class {
+        padding: 9px 9px;
+        background-color: #FAFAFA;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        width: 100%;
+        border-radius: 3px;
+        color: gray;
+        font-size: 11px;
+        border: none;
+    }
+
+    .preferred-class::placeholder {
+        color: #333333;
+    }
+
+    .class-wise {
+        display: flex;
+        justify-content: space-between;
+        height: 34px;
+        background-color: #FAFAFA;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        padding: 0px 8px;
+        border-radius: 3px;
+        margin-bottom: 15px;
+    }
+}
+
+
+.css-1d9ye53-MuiTypography-root {
+    margin: 0;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
+    font-size: 11px !important;
+}
+
+.css-ip2efr-MuiTypography-root {
+    margin: 0;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
+    color: #8C8080;
+    font-size: 11px !important;
+}
+
+.css-1hbvpl3-MuiSvgIcon-root {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    fill: currentColor;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    font-size: 1.5rem !important;
+    -webkit-transform: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
+    transform: none !important;
+}
+

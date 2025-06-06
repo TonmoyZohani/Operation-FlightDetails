@@ -1,0 +1,199 @@
+.flight-info {
+  color: var(--light-gray);
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.flight-time {
+  font-size: 20px;
+  color: var(--secondary-color);
+  font-weight: 500;
+}
+
+.location {
+  color: #444542;
+}
+
+.airport-info {
+  color: #3d3a49;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.date-info {
+  color: var(--light-gray);
+  font-size: 11.5px;
+  font-weight: 400;
+  padding-top: 3px;
+}
+
+.css-1gv0vcd-MuiSlider-track {
+  color: #225f82;
+}
+
+.css-eg0mwd-MuiSlider-thumb {
+  color: #c4161c;
+}
+
+.tabItem {
+  cursor: pointer;
+}
+
+.tabItemLabel {
+  font-size: 10px;
+  font-weight: 500;
+  color: #8f8f98;
+}
+
+.tabItemActiveLabel {
+  color: var(--secondary-color);
+}
+
+.tabItemIndicator {
+  height: 3px;
+  width: 90%;
+  margin-top: 5px;
+}
+
+.tabItemActiveIndicator {
+  background-color: var(--secondary-color);
+}
+
+.common-list-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.common-list-item span {
+  font-size: 11px;
+  font-weight: 500;
+  color: #5d95d7;
+}
+
+ul.common-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 10px;
+}
+
+/* Mobile Responsive */
+
+.header-box {
+  background-color: var(--secondary-color);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+}
+
+.back-icon {
+  color: #fff;
+  font-size: 25px;
+}
+
+.border02 {
+  height: 2px;
+  background-image: linear-gradient(
+    90deg,
+    #d1e9ff,
+    #d1e9ff 75%,
+    transparent 75%,
+    transparent 100%
+  );
+  background-size: 10px 2px;
+  border: none;
+}
+
+.cm-btn {
+  background-color: var(--secondary-color);
+  color: #fff;
+  width: 20px;
+  height: 35px;
+  border-radius: 3px;
+  font-size: 12px;
+  text-transform: none;
+}
+
+.cm-btn:hover {
+  background-color: var(--secondary-color);
+}
+
+.arrow-btn {
+  background-color: #ffe6eb;
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.end_data_text {
+  color: var(--dark-gray);
+  font-size: 14px;
+  position: relative;
+  text-align: center; /* Center the text for better alignment on smaller screens */
+}
+
+.end_data_text::after, 
+.end_data_text::before {
+  content: "";
+  height: 2px;
+  width: 150px;
+  position: absolute;
+  top: 50%;
+  background-color: var(--border-color);
+  transform: translateY(-50%);
+}
+
+/* Right and left lines for larger screens */
+.end_data_text::after {
+  right: -75%;
+}
+.end_data_text::before {
+  left: -75%;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  .end_data_text {
+    font-size: 12px; /* Adjust font size for smaller screens */
+  }
+
+  .end_data_text::after, 
+  .end_data_text::before {
+    width: 80px; /* Shorten the line length */
+  }
+
+  .end_data_text::after {
+    right: -40%;
+  }
+
+  .end_data_text::before {
+    left: -40%;
+  }
+}
+
+/* Extra small screens (e.g., mobile phones) */
+@media (max-width: 480px) {
+  .end_data_text {
+    font-size: 10px; /* Further adjust font size for smaller devices */
+  }
+
+  .end_data_text::after, 
+  .end_data_text::before {
+    width: 50px; /* Make the lines even shorter */
+  }
+
+  .end_data_text::after {
+    right: -25%;
+  }
+
+  .end_data_text::before {
+    left: -25%;
+  }
+}

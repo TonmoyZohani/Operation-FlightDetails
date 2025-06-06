@@ -1,0 +1,48 @@
+name: 🚀 Deploy React App to CPanel
+
+on:
+  push:
+    branches:
+      - main # Runs on push to main branch
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.16.0 # Adjust to match your Node.js version
+          cache: "npm"
+
+      - name: 💾 Increase Node.js Memory Limit
+        run: echo "NODE_OPTIONS=--max-old-space-size=8192" >> $GITHUB_ENV # Increased memory limit
+
+      - name: 📦 Install Dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: 🏗 Build React App
+        run: CI=false NODE_OPTIONS="--max-old-space-size=8192" npm run build:prod # Increased memory limit for build
+
+      - name: 🚀 Deploy to CPanel via FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: 190.92.154.169 # Change to your actual FTP server
+          username: ${{ secrets.FTP_USERNAME }} # Use GitHub Secret for security
+          password: ${{ secrets.FTP_PASSWORD }} # Use GitHub Secret for security
+          local-dir: ./build/ # Upload only the build folder
+          server-dir: / # Adjust if necessary
+          exclude: |
+            **/.git*
+            **/.github*
+            **/node_modules/*
+            **/tests/*
+            .gitignore
+          log-level: verbose # Enables detailed logs for debugging

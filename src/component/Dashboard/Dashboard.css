@@ -1,0 +1,210 @@
+:root {
+    --blue: #5e72e4;
+    --indigo: #5603ad;
+    --purple: #8965e0;
+    --pink: #f3a4b5;
+    --red: #f5365c;
+    --orange: #fb6340;
+    --yellow: #ffd600;
+    --green: #2dce89;
+    --light-green: #03A800;
+    --teal: #11cdef;
+    --cyan: #2bffc6;
+    --gray: #8898aa;
+    --gray-dark: #32325d;
+    --light: #ced4da;
+    --lighter: #e9ecef;
+    --primary: #5e72e4;
+    --secondary: #f7fafc;
+    --success: #2dce89;
+    --info: #11cdef;
+    --warning: #fb6340;
+    --danger: #f5365c;
+    --light: #adb5bd;
+    --dark: #212529;
+    --default: #172b4d;
+    --white: #fff;
+    --neutral: #fff;
+    --darker: #000;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --font-family-sans-serif: Open Sans, sans-serif;
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+}
+
+.bg-red {
+    background-color: var(--red);
+    border-color: var(--red);
+}
+
+.bg-dark {
+    background-color: var(--darker);
+    border-color: var(--darker);
+}
+
+.bg-green {
+    background-color: var(--light-green);
+    border-color: var(--green);
+}
+
+.bg-blue {
+    background-color: var(--blue);
+    border-color: var(--blue);
+}
+
+.bg-orange {
+    background-color: #FF2F00;
+    border-color: #FF2F00;
+}
+
+.bg-yellow {
+    background-color: var(--yellow);
+    border-color: var(--yellow);
+}
+
+.bg-danger {
+    background-color: var(--danger);
+    border-color: var(--danger);
+}
+
+.bg-warning {
+    background-color: var(--warning);
+    border-color: var(--warning);
+}
+
+.bg-success {
+    background-color: var(--success);
+    border-color: var(--success);
+}
+
+.bg-info {
+    background-color: var(--info);
+    border-color: var(--info);
+}
+
+.bg-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.bg-default {
+    background-color: var(--default);
+    border-color: var(--default);
+}
+
+.cal {
+    display: block;
+}
+
+.fc .fc-event-main .fc-event-title {
+    padding: 0.3rem;
+    display: block;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 400;
+    font-size: 0.7rem;
+    text-align: center;
+    font-family: var(--font-family-monospace);
+}
+
+.fc-daygrid-event {
+    position: relative;
+    white-space: nowrap;
+    border-radius: 50px;
+    font-size: .85em;
+    font-weight: 400;
+    width: 100%;
+    height: 26px;
+    margin-right: 20px;
+    margin-bottom: 4px;
+}
+
+.fc .fc-col-header-cell-cushion {
+    font-weight: 500 !important;
+    color: gray;
+}
+
+.fc .fc-daygrid-day-number {
+    position: relative;
+    z-index: 4;
+    padding: 4px;
+    font-weight: 500;
+}
+
+.fc .fc-daygrid-day-frame {
+    position: relative;
+    min-height: 100%;
+    margin-left: 6px;
+    margin-right: 12px;
+}
+
+.nav-link {
+    font-size: 13px;
+    padding-bottom: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1.5px solid #D3D3D3;
+    list-style: none;
+    /* cursor: pointer; */
+}
+
+.nav-link:last-child {
+    border-bottom: none;
+}
+
+.active-link {
+    color: #3C4258;
+}
+
+.pin-class {
+    background-color: var(--dark-gray);
+    width: 27px;
+    height: 27px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: absolute;
+    top: -15px;
+    left: 0;
+}
+
+.full-stats {
+    background-color: var(--primary-color);
+    padding: 12px;
+    width: 12%;
+    border-radius: 10px;
+    height: 115px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.right-arrow {
+    background-color: white;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.stats-card {
+    box-shadow: 0px 0px 7.6px 0px rgba(0, 0, 0, 0.13);
+    padding: 13px;
+    width: 19%;
+    border-radius: 10px;
+    height: 115px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+

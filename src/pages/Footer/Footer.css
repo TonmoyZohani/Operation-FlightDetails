@@ -1,0 +1,304 @@
+.footer-bgs {
+  background: linear-gradient(121.52deg, #5d7f9e 0%, #003566 77.49%);
+  padding: 70px 0 10px 0;
+}
+
+.footer-bgs-alter {
+  background: "#FFFFFF";
+  padding: 70px 0 10px 0;
+}
+
+.message-input {
+  flex-basis: 65%;
+}
+
+.f-logo {
+  width: 150px;
+  margin-top: -10px;
+  margin-left: -10px;
+}
+
+.f-logo img {
+  width: 120px;
+}
+
+.icon img {
+  width: 20px;
+  margin-right: 6px;
+  margin-top: 10px;
+}
+
+.company-contentt h5 {
+  margin-top: 0px;
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 27px;
+  text-align: center;
+}
+
+.company-contenttc,
+.company-contentts h5 {
+  margin-top: 0px;
+  color: #ffffff;
+  /* font-family: "Poppins"; */
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 27px;
+}
+
+.company-contentts p {
+  margin: 0;
+  /* font-family: "Poppins"; */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 26px;
+  color: #dddddd;
+}
+
+.company-link a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+}
+
+.company-link button {
+  padding: 2px 0px;
+  color: #fff !important;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+.company-link button:nth-child(1) {
+  padding-top: 0;
+}
+
+.email-p {
+  padding-top: 10px;
+}
+
+.iata {
+  width: 100px;
+  margin: auto;
+  margin-top: -10px;
+}
+
+.iata img {
+  width: 100%;
+}
+
+.toab {
+  margin: auto;
+  width: 120px !important;
+}
+
+.atab {
+  margin: auto;
+  width: 140px;
+}
+
+.custom-footer-btns button {
+  background: #da143c;
+  /* font-family: "Poppins"; */
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 24px;
+  color: #ffffff;
+}
+
+.custom-footer-btns button:hover {
+  background-color: white;
+  color: #da143c;
+}
+
+.payment-img {
+  text-align: center;
+}
+
+.payment-img img {
+  width: 870px;
+}
+
+.reserve-right p {
+  text-align: right;
+  /* font-family: "Poppins"; */
+  font-style: normal;
+  font-weight: 200;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0px;
+  padding: 20px 0px;
+}
+
+.companay-centent-child {
+  display: flex;
+  column-gap: 10px;
+  /* justify-content: space-between; */
+  margin-top: 15px;
+}
+
+.message-input input {
+  padding: 7px 10px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  background: transparent;
+  color: #fff;
+}
+
+.message-input ::placeholder {
+  color: #fff;
+  opacity: 1;
+}
+
+/* @media (max-width: 425px) and (min-width: 320px) {
+    .payment-img {
+      width: 100px;
+    }
+    .payment-img img{
+      width: 100px;
+    }
+  
+  } */
+
+/* media query for tab */
+
+@media all and (min-width: 1025px) and (max-width: 2000px) {
+  .subscribe-f {
+    /* margin-left: 100px !important; */
+    padding-left: 50px !important;
+  }
+}
+
+@media all and (min-width: 769px) and (max-width: 1024px) {
+  .iata {
+    margin-left: 0;
+  }
+
+  .toab {
+    margin-left: 0;
+  }
+
+  .atab {
+    margin-left: 0;
+  }
+
+  .round-trip {
+    width: 88%;
+  }
+
+  .banner-form-content label {
+    font-size: 12px;
+  }
+
+  .card-content h3 {
+    font-size: 17px;
+  }
+
+  .icon img {
+    width: 20px;
+  }
+
+  .company-contentt h5 {
+    font-size: 15px;
+    text-align: left;
+  }
+
+  .company-contentts p {
+    font-size: 14px;
+  }
+}
+
+@media all and (min-width: 429px) and (max-width: 768px) {
+  .iata {
+    margin-left: 0;
+  }
+
+  .toab {
+    margin-left: 0;
+  }
+
+  .atab {
+    margin-left: 0;
+  }
+
+  .payment-img {
+    padding: 30px 0px;
+  }
+
+  .payment-img img {
+    width: 500px;
+  }
+
+  .footer-bgs {
+    padding: 70px 0 10px 0;
+  }
+
+  .company-contentt h5 {
+    text-align: left;
+  }
+}
+
+@media all and (min-width: 320px) and (max-width: 428px) {
+  .f-parent-content {
+    margin-top: 20px !important;
+  }
+
+  .iata {
+    margin-left: 0;
+  }
+
+  .toab {
+    margin-left: 0;
+  }
+
+  .atab {
+    margin-left: 0;
+  }
+
+  .footer-bgs {
+    /* margin-top: 50px; */
+    padding: 70px 0 10px 0;
+  }
+
+  .f-logo {
+    width: 100px;
+  }
+
+  .f-logo img {
+    width: 100%;
+  }
+
+  .icon img {
+    width: 20px;
+  }
+
+  .company-contentt h5 {
+    font-size: 15px;
+    text-align: left;
+  }
+
+  .company-contentts p {
+    font-size: 14px;
+  }
+
+  .reserve-right p {
+    font-size: 11px;
+  }
+
+  .payment-img {
+    text-align: center;
+  }
+
+  .payment-img img {
+    width: 300px;
+  }
+}
+
+.message-input input {
+  width: 100%;
+}

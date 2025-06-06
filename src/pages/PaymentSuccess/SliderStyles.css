@@ -1,0 +1,12 @@
+/* Custom style for all dots */
+.slick-dots li button:before {
+  color: #999; /* Default color for inactive dots */
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+/* Active dot styling */
+.slick-dots li.slick-active button:before {
+  color: #000; /* Color for active dot */
+  opacity: 1;
+}

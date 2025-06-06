@@ -1,0 +1,243 @@
+/* .header-parent {
+  width: 90% !important;
+  margin: auto !important;
+  padding: 30px 0px;
+} */
+
+.header-width {
+    padding: 0px !important;
+  }
+  
+  .humburger-icon {
+    padding: 0px !important;
+    padding-right: 10px !important;
+  }
+  
+  .logo-header img {
+    margin-left: 25px;
+  }
+  
+  .css-1t6c9ts {
+    padding-left: 80px !important;
+  }
+  
+  /* .MuiButton-text {
+      color: red !important;
+  } */
+  
+  .headerBg {
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+  
+  /*  menu style here */
+  
+  .active {
+    font-family: "Mukta";
+  }
+  
+  .manu-parent {
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 100%;
+    align-items: center;
+  }
+  
+  .menu-content button {
+    color: #707173 !important;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    text-transform: capitalize;
+    padding: 0px 15px !important;
+  }
+  
+  #active {
+    color: #003566 !important;
+  }
+  
+  .menu-content button:hover {
+    background: #fff;
+  }
+  
+  .menu-content a {
+    text-decoration: none !important;
+  }
+  
+  .menu-btn a {
+    text-decoration: none;
+  }
+  /* 
+  #register-button {
+    border: 2px solid #003566;
+    padding: 4px 10px;
+    color: #003566 !important;
+  } */
+  
+  #register-responsive {
+    border: 2px solid #003566;
+    padding: 4px 10px;
+    color: #003566 !important;
+    font-weight: 500;
+    margin-left: 12px;
+  }
+  
+  .menu-btn button {
+    margin: 0px 5px;
+    background: #003566;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    text-transform: capitalize;
+  }
+  
+  .menu-btn button:hover {
+    background: #003566;
+  }
+  
+  /* .MuiButton-text {
+    color: #000 !important;
+  } */
+  
+  /* .MuiIconButton-root {
+    color: black !important;
+  } */
+  
+  .MuiAvatar-circular {
+    display: none !important;
+  }
+  
+  .cust-signIn button {
+    color: #fff !important;
+    background: #003566;
+  }
+  
+  .custom-modal {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  /* #signIn-responsive {
+    background-color: #003566 !important;
+    color: #fff !important;
+    margin-left: 12px;
+  } */
+  
+  @keyframes fadeOut {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+  .custom-modal {
+    animation: fadeIn 0.5s;
+  }
+  @keyframes fadeIn {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+  
+  @media only screen and (min-width: 320px) and (max-width: 325px) {
+    .header-parent {
+      width: 100% !important;
+    }
+    /* .header-logo img {
+      padding-left: 71px;
+      width: 130px;
+    } */
+    .humburger-icon {
+      padding: 0px !important;
+      padding-right: 50px !important;
+    }
+  }
+  
+  @media only screen and (min-width: 375px) and (max-width: 380px) {
+    .header-parent {
+      width: 100% !important;
+    }
+  
+    /* .header-logo img {
+      padding-left: 38px;
+    } */
+  
+    .humburger-icon {
+      padding: 0px !important;
+      padding-right: 50px !important;
+    }
+  }
+  
+  @media only screen and (min-width: 425px) and (max-width: 430px) {
+    .header-parent {
+      width: 100% !important;
+    }
+  
+    /* .header-logo img {
+      padding-left: 55px;
+    } */
+  
+    .humburger-icon {
+      padding: 0px !important;
+      padding-right: 50px !important;
+    }
+  }
+  
+  @media only screen and (min-width: 768px) and (max-width: 775px) {
+    .header-parent {
+      width: 100% !important;
+    }
+  
+    /* .header-logo img {
+      padding-left: 220px;
+    } */
+  
+    .humburger-icon {
+      padding: 0px !important;
+      padding-right: 50px !important;
+    }
+  }
+  
+  /* // Slider  */
+  #app {
+    height: 100%;
+  }
+  
+  /* body {
+    background: #eee;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+  } */
+  
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .swiper-slide {
+    /* text-align: center; */
+    font-size: 18px;
+    background: #fff;
+  
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+  
+ 

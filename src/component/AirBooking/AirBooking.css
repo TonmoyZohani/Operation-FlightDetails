@@ -1,0 +1,78 @@
+.stepper-container {
+  height: 42px;
+  width: 99%;
+  margin-left: 1px;
+  margin-top: 15px;
+  background-color: #fff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.circle-box {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background-color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.circle-box.grey-circle {
+  background-color: grey;
+}
+
+.circle-text {
+  color: white;
+  font-size: 12px;
+}
+
+.btn-style {
+  position: sticky;
+  bottom: 0px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  font-size: 12px;
+  width: 100%;
+  text-align: left;
+  justify-content: flex-start;
+  padding-left: 20px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  z-index: 1000;
+}
+
+.text-area {
+  resize: none;
+  border-radius: 4px;
+  border: 1px solid #2D669B;
+  padding-top: 10px;
+  padding-left: 15px;
+  margin-top: 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.next-step {
+  position: sticky;
+  bottom: 0px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  font-size: 12px;
+  width: 100%;
+  text-align: left;
+  justify-content: flex-start;
+  padding-left: 20px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  z-index: 1000;
+}
+
+.next-step:hover {
+  background-color: var(--primary-color);
+}

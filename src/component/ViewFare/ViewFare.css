@@ -1,0 +1,64 @@
+/* styles.css */
+
+.selected {
+    border: 1px solid var(--primary-color);
+    background-color: #f3f8fa;
+    border-radius: 4px;
+    padding: 12px 15px;
+    display: flex;
+    margin-bottom: 15px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    cursor: pointer;
+  }
+  
+  .unselected {
+    border: 1px solid #a8b9cd;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 12px 15px;
+    display: flex;
+    margin-bottom: 15px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    cursor: pointer;
+  }
+  
+  .side-line {
+    width: 4px;
+    height: 15px;
+    background-color: var(--secondary-color);
+    position: absolute;
+    left: -15px;
+    top: 13px;
+  }
+  
+  .button-class {
+    text-transform: none;
+    color: var(--white);
+    background-color: var(--secondary-color);
+    font-size: 11px;
+    padding: 4px 18px;
+    margin-top: 10px;
+  }
+  
+  .no-fare {
+    border: 1px solid #a8b9cd;
+    border-radius: 4px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .no-plane {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F3F6EF;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  

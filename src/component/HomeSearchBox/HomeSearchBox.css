@@ -1,0 +1,100 @@
+.new-blink {
+    position: absolute;
+    top: 0;
+    rotate: 30deg;
+    z-index: 2;
+    margin-left: 15px;
+  }
+  
+  .home-search-box-wrapper {
+    height: fit-content;
+  }
+  .home-search-Box {
+    border-radius: 5px;
+    height: fit-content;
+    width: 100%;
+  }
+  
+  .searchBar-header h5 {
+    font-weight: 200;
+    font-size: clamp(1rem, 4.5vw, 45px);
+    text-align: center;
+    padding: 0px 0px 5px;
+  }
+  
+  .home-search-input-box {
+    background-color: #fff;
+    height: 85px;
+  }
+  
+  .home-search-input-5 h4 {
+    line-height: 10px;
+    color: #8c8080;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+  }
+  
+  .home-search-input-5 h6 {
+    color: #dc143c;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 30px;
+  }
+  
+  .home-search-input-5 input {
+    width: 100%;
+    line-height: 0px;
+    border: none;
+  }
+  .home-search-Box .home-search-box-2 .MuiTabs-root {
+    opacity: 1 !important;
+    min-height: 0px;
+    color: "#FFF";
+  }
+  .home-search-Box .home-search-box-2 .MuiTabs-root button {
+    background-color: #dc143c;
+    opacity: 1;
+    margin: 0;
+    padding: 10px 20px !important;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .home-search-Box .home-search-box-2 .Mui-selected {
+    background-color: #fff !important;
+    color: #dc143c;
+    font-weight: bold;
+    border-bottom: none !important;
+  }
+  .home-search-Box .home-search-box-1 .MuiTabs-root {
+    height: fit-content;
+  }
+  .home-search-Box .home-search-box-1 .MuiTabs-centered {
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+  }
+  .home-search-Box .home-search-box-1 .MuiTabs-root .MuiTabs-centered button {
+    opacity: 5;
+    margin: 0 !important;
+    font-weight: bold;
+    padding: 10px 20px !important;
+  }
+  .home-search-Box .home-search-box-1 .Mui-selected {
+    border-bottom: 2px solid #dc143c !important;
+    transition: all 0.5 ease-in-out !important ;
+  }
+  .home-search-box-1 .Mui-selected {
+    border-bottom: 4px solid #dc143c !important;
+    transition: all 0.2s ease-in-out !important ;
+  }
+  .home-search-Box .home-search-box-1 .MuiTabs-root button {
+    min-height: 0px !important;
+    opacity: 1;
+    font-weight: bold !important;
+  }
+  
+  .home-search-Box .MuiTabs-indicator {
+    display: none !important;
+  }
