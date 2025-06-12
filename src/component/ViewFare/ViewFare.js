@@ -46,7 +46,8 @@ const ViewFare = ({
   selectedSplitBrands,
   advancedSelectedSeats,
   updatedBrandsByFlightIndex,
-  crrFlightData
+  crrFlightData,
+  handleBrandClick
 }) => {
   const hasShownErrorToast = useRef(false);
   const { jsonHeader } = useAuth();
@@ -144,27 +145,6 @@ const ViewFare = ({
   }, [seatMapData]);
 
 
-
-  const handleSplitAndBooking = () => {
-    navigate("/dashboard/airbooking", {
-      state: {
-        flightData,
-        crrItenary,
-        searchType,
-        totalPassenger,
-        brand: selectedSplitBrands?.flat(),
-        cabin,
-        segmentsList,
-        fareRules: modifiedBrands,
-        reissuePassengers: reissuePassengers || [],
-        flightAfterSearch,
-        paxDetails: paxDetails || [],
-        bookingId: bookingId || null,
-        flightBrand,
-      },
-    });
-  };
-
   const handleSeatAirprice = async (brand, brandIndex) => {
     setErrorMessage("");
     // setAdvancedLoading(true);
@@ -226,35 +206,6 @@ const ViewFare = ({
 
   // Fetching fare rules (regular/split/reissue)
 
-
-  useEffect(() => {
-    if (!showDetails || alreadyButtonClicked || searchType === "regular")
-      return;
-
-    const fetchData = async () => {
-      try {
-        const fareData = flightData[crrItenary]?.brands[0]?.structure
-          ? [{ structure: flightData[crrItenary]?.brands[0].structure }]
-          : await fetchFareRules(
-              flightData[crrItenary]?.brands[0]?.brandId,
-              flightData[crrItenary]
-            );
-
-        const mergedBrand = [
-          {
-            ...flightData[crrItenary]?.brands[0],
-            ...fareData?.[0],
-          },
-        ];
-        dispatch(setAdvancedModifiedBrands(mergedBrand));
-      } catch (error) {
-        console.error("Error fetching fare rules:", error);
-      }
-    };
-
-    fetchData();
-  }, [isReset, alreadyButtonClicked, searchType, showDetails]);
-
   return (
     <Box sx={{ py: { xs: "15px", md: 0 } }}>
       {searchType !== "advanced" && <AirlineChargeNotice />}
@@ -295,7 +246,7 @@ const ViewFare = ({
               isFareLoading={isFareLoading}
               airPriceLoading={airPriceLoading}
               setAirPriceLoading={setAirPriceLoading}
-              handleFetchAndBooking={handleFetchAndBooking}
+              // handleFetchAndBooking={handleFetchAndBooking}
               flightAfterSearch={flightAfterSearch}
               cmsData={cmsData}
               errorMessage={errorMessage}
@@ -322,6 +273,10 @@ const ViewFare = ({
               flightBrand={flightBrand}
               setFlightBrand={setFlightBrand}
               crrItenary={crrItenary}
+
+              // modifiedBrands={updatedBrandsByFlightIndex[crrFlightData]}
+              // handleBrandClick={handleBrandClick}
+
             />
           )}
         </Grid>

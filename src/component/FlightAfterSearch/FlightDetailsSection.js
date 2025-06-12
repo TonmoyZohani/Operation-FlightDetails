@@ -350,24 +350,32 @@ const handleBrandClick = (brand) => {
   useEffect(() => {
     const fetchFareRulesAndAirPrice = async () => {
       if (!brandsByFlight || brandsByFlight.length === 0) return;
-
-      await Promise.all(
-        brandsByFlight.map(async brand => {
-          if (!brand.structure || !brand.nonStructure) {
-            return fetchFareRulesMutation.mutateAsync(brand.brandId);
-          } else {
-            updateBrand(brand.brandId, { airPriceFlag: false }, setBrandsByFlight);
-          }
-        })
-      );
-
+  
+      if (flightTab === "selectfare") {
+        await Promise.all(
+          brandsByFlight.map(async (brand) => {
+            if (!brand.structure || !brand.nonStructure) {
+              return fetchFareRulesMutation.mutateAsync(brand.brandId);
+            } else {
+              updateBrand(brand.brandId, { airPriceFlag: false }, setBrandsByFlight);
+            }
+          })
+        );
+      } else if (flightTab === "flight") {
+        const firstBrand = brandsByFlight[0];
+        if (firstBrand && (!firstBrand.structure || !firstBrand.nonStructure)) {
+          await fetchFareRulesMutation.mutateAsync(firstBrand.brandId);
+        } else {
+          updateBrand(firstBrand.brandId, { airPriceFlag: false }, setBrandsByFlight);
+        }
+      }
+  
       fetchAirPriceMutation.mutate(brandsByFlight[0]);
     };
-
+  
     fetchFareRulesAndAirPrice();
-  }, [brandsByFlight]);
-
-  /*𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕 End Rendering Necessary Functions 𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕𐤕*/
+  }, [brandsByFlight, flightTab]);
+  
 
   const isShowSeats = location.pathname === "/dashboard/flightaftersearch";
 
@@ -455,7 +463,7 @@ const handleBrandClick = (brand) => {
       flightAfterSearch === "reissue-search"
     ) {
       return [
-        { value: "selectfare", label: "Select Fare" },
+        { value: "selectFare", label: "Select Fare" },
         { value: "flight", label: "Flight Details" },
         { value: "fare", label: "Fare Summary" },
         { value: "fareDifference", label: "Fare Difference" },
@@ -467,7 +475,7 @@ const handleBrandClick = (brand) => {
 
     if (bookType === "normal" && flightAfterSearch === "reissue-search") {
       return [
-        { value: "selectfare", label: "Select Fare" },
+        { value: "selectFare", label: "Select Fare" },
         { value: "flight", label: "Flight Details" },
         { value: "fare", label: "Fare Summary" },
         { value: "fareDifference", label: "Fare Difference" },
@@ -482,13 +490,13 @@ const handleBrandClick = (brand) => {
     ) {
       const items = flightData?.advanceSearch
         ? [
-            { value: "selectfare", label: "Select Fare" },
+            { value: "selectFare", label: "Select Fare" },
             { value: "seatAvailability", label: "Seat Availability" },
             { value: "flight", label: "Flight Details" },
             { value: "fare", label: "Fare Summary" },
           ]
         : [
-            { value: "selectfare", label: "Select Fare" },
+            { value: "selectFare", label: "Select Fare" },
             { value: "flight", label: "Flight Details" },
             { value: "fare", label: "Fare Summary" },
           ];
@@ -509,7 +517,7 @@ const handleBrandClick = (brand) => {
     }
 
     return [
-      { value: "selectfare", label: "Select Fare" },
+      { value: "selectFare", label: "Select Fare" },
       { value: "flight", label: "Flight Details" },
       { value: "fare", label: "Fare Summary" },
       ...(fareAfterRules?.length > 0
@@ -706,7 +714,7 @@ const handleBrandClick = (brand) => {
               key={tab.value}
               onClick={() => {
                 handleFlightTab(tab.value);
-                if (tab.value === "selectfare") {
+                if (tab.value === "selectFare") {
                   dispatch(setShouldCallAirPrice("fare"));
                 }
               }}
@@ -874,7 +882,7 @@ const handleBrandClick = (brand) => {
                   bookType={bookType}
                 />
               );
-            case "selectfare":
+            case "selectFare":
               return (
                 <>
                   {fareCard === "afterFare" &&
@@ -973,6 +981,7 @@ const handleBrandClick = (brand) => {
 
                       updatedBrandsByFlightIndex={updatedBrandsByFlightIndex}
                       crrFlightData={crrFlightData}
+                      handleBrandClick={handleBrandClick}
                     />
                   )}
                 </>

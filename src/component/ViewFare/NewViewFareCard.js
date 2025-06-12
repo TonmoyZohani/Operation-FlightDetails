@@ -161,6 +161,8 @@ const NewViewFareCard = ({
   fareCard,
   crrItenary,
   splitFlightArr,
+
+  handleBrandClick
 }) => {
   const { cmsData } = useSelector((state) => state.flightAfter);
   const [cardLoading, setCardLoading] = useState(false);
@@ -344,16 +346,19 @@ const NewViewFareCard = ({
                         marginRight: "10px",
                         cursor: "pointer",
                       }}
-                      onClick={() =>
-                        setFlightBrand((prev) => {
-                          const updated = Array.isArray(prev) ? [...prev] : [];
-                          while (updated.length <= crrItenary) {
-                            updated.push([]);
-                          }
+                      // onClick={() =>
+                      //   setFlightBrand((prev) => {
+                      //     const updated = Array.isArray(prev) ? [...prev] : [];
+                      //     while (updated.length <= crrItenary) {
+                      //       updated.push([]);
+                      //     }
 
-                          updated[crrItenary] = [item];
-                          return updated;
-                        })
+                      //     updated[crrItenary] = [item];
+                      //     return updated;
+                      //   })
+                      // }
+                      onClick={() =>
+                        handleBrandClick(item)
                       }
                     >
                       <FareCard
