@@ -45,9 +45,12 @@ const ViewFare = ({
   showDetails,
   selectedSplitBrands,
   advancedSelectedSeats,
+
+  
   updatedBrandsByFlightIndex,
   crrFlightData,
-  handleBrandClick
+  handleBrandClick,
+  brandsByFlight
 }) => {
   const hasShownErrorToast = useRef(false);
   const { jsonHeader } = useAuth();
@@ -144,46 +147,6 @@ const ViewFare = ({
     }
   }, [seatMapData]);
 
-
-  const handleSeatAirprice = async (brand, brandIndex) => {
-    setErrorMessage("");
-    // setAdvancedLoading(true);
-    dispatch(setViewButtonShow(false));
-
-    const targetBrand = brand || flightData[crrItenary]?.brands?.[0];
-    const targetBrandIndex = brandIndex ?? 0;
-
-    try {
-      // If structure exists, use it; otherwise fetch
-      const fareData = targetBrand?.structure
-        ? [{ structure: targetBrand?.structure }]
-        : await fetchFareRules(targetBrand?.brandId, flightData[crrItenary]);
-
-      const result = await fetchAirPrice(targetBrand, targetBrandIndex);
-      const response = result?.data?.response?.[0];
-
-      if (response) {
-        const modifiedBrands = response?.brands?.map((brand) => ({
-          ...brand,
-          ...(fareData?.[0] || {}),
-        }));
-        dispatch(setAdvancedModifiedBrands(modifiedBrands));
-        dispatch(setAdvancedFlightData(response));
-        dispatch(setAlreadyButtonClicked(true));
-      } else {
-        dispatch(setAdvancedFlightData(null));
-        dispatch(setAdvancedModifiedBrands([]));
-        setErrorMessage("No booking data found.");
-      }
-    } catch (error) {
-      dispatch(setAdvancedFlightData(null));
-      dispatch(setAdvancedModifiedBrands([]));
-      console.error("Error fetching advanced booking:", error);
-      setErrorMessage("Failed to fetch advanced booking data.");
-    } finally {
-      setAdvancedLoading(false);
-    }
-  };
 
   const handleFetchAdvancedBooking = () => {
     navigate("/dashboard/airbooking", {

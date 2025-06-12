@@ -113,13 +113,38 @@ const abortController = useRef(new AbortController());
   setBrandsByFlight(currentBrands);
 }, [crrFlightData, flightDataArr, updatedBrandsByFlightIndex]);
 
+useEffect(() => {
+  const updatedBrands = updatedBrandsByFlightIndex?.[crrFlightData];
+
+  if (updatedBrands && updatedBrands.length > 0) {
+    setBrandOfSelectedSeat(prev => ({
+      ...prev,
+      [crrFlightData]: [updatedBrands[0]]
+    }));
+  }
+}, [updatedBrandsByFlightIndex, crrFlightData]);
+
+
 // Save updated brands only for current crrFlightData index
 const setBrandsForIndex = (updatedBrands) => {
-  setUpdatedBrandsByFlightIndex((prev) => ({
-    ...prev,
-    [crrFlightData]: updatedBrands,
-  }));
+  setUpdatedBrandsByFlightIndex((prev) => {
+    const newState = {
+      ...prev,
+      [crrFlightData]: updatedBrands,
+    };
+
+    // Also update the brandOfSelectedSeat here:
+    if (updatedBrands?.length > 0) {
+      setBrandOfSelectedSeat((prevSeats) => ({
+        ...prevSeats,
+        [crrFlightData]: [updatedBrands[0]],
+      }));
+    }
+
+    return newState;
+  });
 };
+
 
 const updateBrand = (brandId, updateData, updateFn) => {
   updateFn((prev) => {
@@ -982,6 +1007,7 @@ const handleBrandClick = (brand) => {
                       updatedBrandsByFlightIndex={updatedBrandsByFlightIndex}
                       crrFlightData={crrFlightData}
                       handleBrandClick={handleBrandClick}
+                      brandsByFlight={brandsByFlight}
                     />
                   )}
                 </>

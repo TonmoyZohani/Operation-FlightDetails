@@ -417,16 +417,19 @@ const NewViewFareCard = ({
                     px: "10px",
                     cursor: "pointer",
                   }}
-                  onClick={() =>
-                    setFlightBrand((prev) => {
-                      const updated = Array.isArray(prev) ? [...prev] : [];
-                      while (updated.length <= crrItenary) {
-                        updated.push([]);
-                      }
+                  // onClick={() =>
+                  //   setFlightBrand((prev) => {
+                  //     const updated = Array.isArray(prev) ? [...prev] : [];
+                  //     while (updated.length <= crrItenary) {
+                  //       updated.push([]);
+                  //     }
 
-                      updated[crrItenary] = [item];
-                      return updated;
-                    })
+                  //     updated[crrItenary] = [item];
+                  //     return updated;
+                  //   })
+                  // }
+                  onClick={() =>
+                    handleBrandClick(item)
                   }
                 >
                   <FareCard
