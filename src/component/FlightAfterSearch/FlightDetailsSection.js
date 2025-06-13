@@ -98,6 +98,10 @@ const FlightDetailsSection = ({
   });
 
  // Code In Home
+ const segmentsArr = flightDataArr.map(data => data?.cityCount || []);
+ const [selectedSeats,setSelectedSeats] = useState({})
+
+
  const apiCallTracker = useRef({
   fareRules: false,
   airPrice: false,
@@ -107,6 +111,26 @@ const abortController = useRef(new AbortController());
  const [crrFlightData, setCrrFlightData] = useState(0);
  const [updatedBrandsByFlightIndex, setUpdatedBrandsByFlightIndex] = useState({});
  const [brandsByFlight, setBrandsByFlight] = useState([]);
+
+ useEffect(() => {
+  if (isReset || !selectedSeats?.[crrFlightData]?.length) {
+    const extractedData = segmentsArr[crrFlightData]?.map((segmentArray) =>
+      segmentArray.map((segment) => ({
+        bookingClass: segment.bookingClass,
+        availableSeats: segment.availableSeats,
+        departure: segment.departure,
+        arrival: segment.arrival,
+        departureDateTime: segment.departureDateTime,
+        arrivalDateTime: segment.arrivalDateTime,
+      }))
+    );
+
+    setSelectedSeats(prev => ({
+      ...prev,
+      [crrFlightData]: extractedData || [],
+    }));
+  }
+}, [isReset, showDetails, segmentsArr, crrFlightData]);
  
  useEffect(() => {
   const currentBrands = updatedBrandsByFlightIndex[crrFlightData] || flightDataArr?.[crrFlightData]?.brands || [];
@@ -144,7 +168,6 @@ const setBrandsForIndex = (updatedBrands) => {
     return newState;
   });
 };
-
 
 const updateBrand = (brandId, updateData, updateFn) => {
   updateFn((prev) => {
@@ -299,6 +322,48 @@ const updateBrand = (brandId, updateData, updateFn) => {
     },
   }
 );
+
+const fetchSeatMapData = async () => {
+  const url = `${process.env.REACT_APP_BASE_URL}/api/v1/user/seat-map`;
+  const body = JSON.stringify({ data: flightDataArr[crrFlightData]?.uuid });
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: jsonHeader().headers,
+    body: body,
+  });
+
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+
+  const result = await response.json();
+  return result.data;
+};
+
+const {
+  data: seatMapData,
+  isLoading: seatLoading,
+  error,
+  refetch: refetchSeatMap,
+} = useQuery({
+  queryKey: ["seatMap", crrFlightData],
+  queryFn: fetchSeatMapData,
+  enabled: false, // Don't run initially!
+  staleTime: 5 * 60 * 1000,
+  onError: (err) => {
+    if (err.name !== "AbortError") {
+      console.error("Seat map fetch error:", err);
+    }
+  },
+});
+
+useEffect(() => {
+  if (flightTab === "seatAvailability") {
+    refetchSeatMap();
+  }
+}, [flightTab, crrFlightData]);
+
 
 const handleBrandClick = (brand) => {
   if (!brand.airPriceFlag) {

@@ -58,7 +58,6 @@ const ViewFare = ({
   const [isFareLoading, setIsFareLoading] = useState(false);
   const [airPriceLoading, setAirPriceLoading] = useState("");
   const [advanceSearchResult, setAdvanceSearchResult] = useState([]);
-  const segments = flightData[crrItenary]?.cityCount;
   const [isReset, setIsReset] = useState(false);
   const [modifiedBrands, setModifiedBrands] = useState(
     flightData[crrItenary]?.brands
@@ -82,64 +81,6 @@ const ViewFare = ({
   const hasInitializedSeats = useRef(false);
 
 
-  useEffect(() => {
-    if (selectedSeats.length === 0 || isReset) {
-      const extractedData = segments.map((segmentArray) =>
-        segmentArray.map((segment) => ({
-          bookingClass: segment.bookingClass,
-          availableSeats: segment.availableSeats,
-          departure: segment.departure,
-          arrival: segment.arrival,
-          departureDateTime: segment.departureDateTime,
-          arrivalDateTime: segment.arrivalDateTime,
-        }))
-      );
-
-      dispatch(setSelectedSeats(extractedData));
-      hasInitializedSeats.current = true;
-    }
-  }, [isReset, showDetails]);
-
-  const fetchSeatMapData = async () => {
-    const url = `${process.env.REACT_APP_BASE_URL}/api/v1/user/seat-map`;
-    const body = JSON.stringify({ data: flightData[crrItenary]?.uuid });
-
-    const response = await fetch(url, {
-      method: "POST",
-      headers: jsonHeader().headers,
-      body: body,
-    });
-
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-
-    const result = await response.json();
-    return result.data;
-  };
-
-  const {
-    data: seatMapData,
-    isLoading: seatLoading,
-    error,
-    refetch: refetchSeatMap,
-  } = useQuery({
-    queryKey: ["seatMap", data],
-    queryFn: () => fetchSeatMapData(data),
-    enabled: false,
-    staleTime: 5 * 60 * 1000,
-    onError: (err) => {
-      if (err.name !== "AbortError") {
-        console.error("Seat map fetch error:", err);
-      }
-    },
-  });
-
-  useEffect(() => {
-    if (searchType === "advanced" && showDetails) {
-      refetchSeatMap();
-    }
-  }, [searchType, showDetails, refetchSeatMap]);
 
   useEffect(() => {
     if (seatMapData) {
